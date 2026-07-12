@@ -1,0 +1,14 @@
+[Added Associations]
+application/pdf=firefox-6.desktop;firefox-5.desktop;firefox-4.desktop;firefox-3.desktop;firefox-2.desktop;
+image/jpeg=imv-5.desktop;imv-4.desktop;imv-3.desktop;imv-2.desktop;
+
+[Default Applications]
+application/pdf=firefox-6.desktop;
+image/jpeg=imv-5.desktop;
+text/html=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/figma=figma-linux.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/postman=Postman.desktop
+x-scheme-handler/unknown=google-chrome.desktop

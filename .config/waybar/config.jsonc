@@ -1,0 +1,69 @@
+{
+    "layer": "top",
+    "position": "top",
+    "margin-top": 12,
+    "margin-left": 10,
+    "margin-right": 10,
+    "spacing": 0,
+    
+    // Deixamos as laterais vazias para a ilha ficar no centro
+    "modules-left": [],
+    "modules-center": ["group/island"], // Vamos agrupar tudo em um bloco só
+    "modules-right": [],
+
+    "group/island": {
+        "orientation": "horizontal",
+        "modules": [
+            "hyprland/workspaces",
+            "pulseaudio",
+            "network",
+            "tray",
+            "battery",
+            "clock",
+	    "hyprland/language"	
+        ]
+    },
+
+    "hyprland/workspaces": {
+        "active-only": false,   
+        "all-outputs": true,
+        "format": "{icon}",
+        "persistent-workspaces": {
+            "*": 5
+        }
+    },
+    "hyprland/language": {
+    "format": " {short}",
+        "format-map": {
+        "us": "EN",
+        "br": "PT"
+    },
+        "on-click": "hyprctl switchxkblayout all next",
+        "keyboard-name": "evision-rgb-keyboard"
+   },
+    "clock": {
+        "format": "{:%H:%M}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": { "default": ["", "", ""] },
+        "on-click": "kitty -e pulsemixer"
+    },
+    "battery": {
+        "states": { "warning": 30, "critical": 15 },
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+    // "interface": "enp40s0", // Opcional: force a interface se tiver mais de uma
+    "format-wifi": "",
+    "format-ethernet": "",
+    "format-linked": "{ifname} (No IP)",
+    "format-disconnected": "󰤮",
+    "tooltip-format": "{ifname} via {gwaddr}",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}" // Se clicar, ele mostra o nome técnico
+    },
+    "tray": { "spacing": 10, "icon-size": 18}
+}

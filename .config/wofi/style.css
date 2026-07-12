@@ -1,0 +1,43 @@
+window {
+    background-color: #1a1b26; /* Um tom de azul escuro profundo */
+    border: 2px solid #3b4252;
+    border-radius: 12px;
+    font-family: "Inter", "JetBrains Mono", sans-serif;
+    font-size: 14px;
+}
+
+#input {
+    background-color: #24283b;
+    color: #c0caf5;
+    border: none;
+    border-radius: 8px;
+    margin: 10px;
+    padding: 10px;
+}
+
+#inner-box {
+    margin: 5px;
+}
+
+#outer-box {
+    margin: 5px;
+}
+
+#entry {
+    padding: 10px;
+    border-radius: 8px;
+}
+
+#entry:selected {
+    background-color: #3d59a1; /* Destaque suave */
+    outline: none;
+}
+
+#text {
+    color: #c0caf5;
+}
+
+#text:selected {
+    color: #ffffff;
+    font-weight: bold;
+}

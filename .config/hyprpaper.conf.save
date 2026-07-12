@@ -1,0 +1,13 @@
+
+mode_of_adjustment = cover
+}
+
+wallpaper {
+monitor = HDMI-A-1
+path = /home/pedroka/Wallpapers/wallpaper1.jpg
+mode_of_adjustment = cover
+}
+
+splash = false
+
+ipc = off 

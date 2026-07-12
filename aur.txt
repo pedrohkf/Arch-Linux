@@ -1,0 +1,13 @@
+burpsuite
+figma-linux
+google-chrome
+grub-customizer
+libresprite-git
+postman-bin
+spicetify-cli
+spotify
+sublime-text-4
+visual-studio-code-bin
+weylus-bin
+yay
+yay-debug
