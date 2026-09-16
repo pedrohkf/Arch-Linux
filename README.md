@@ -4,6 +4,12 @@ My personal Arch Linux configuration and backup repository.
 
 This repository contains the configuration files I use on my daily Arch Linux setup, allowing me to quickly recreate my development environment on a new machine.
 
+> ✨ **Want the macOS-style look?** There's a second, newer setup in here —
+> Hyprland with Lua config, a live theme switcher, and the
+> [Modus](https://github.com/S4NKALP/Modus) shell (top bar, dock, spotlight,
+> traffic-light window buttons, the works). See
+> **[docs/hyprland-modus-setup.md](docs/hyprland-modus-setup.md)**.
+
 ## 📦 Included
 
 * Hyprland
@@ -20,13 +26,17 @@ This repository contains the configuration files I use on my daily Arch Linux se
 ```text
 .
 ├── .config/
-│   ├── hypr/
+│   ├── hypr/                  # Hyprland (Lua) + theme switcher + Modus patches
+│   ├── modus-desktop-widgets/ # custom Modus desktop widgets (e.g. music player)
 │   ├── waybar/
 │   ├── kitty/
 │   ├── wofi/
 │   ├── gtk-3.0/
 │   ├── gtk-4.0/
 │   └── mimeapps.list
+├── docs/
+│   └── hyprland-modus-setup.md
+├── screenshots/
 ├── packages.txt
 ├── aur.txt
 └── README.md
