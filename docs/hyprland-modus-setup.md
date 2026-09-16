@@ -22,8 +22,8 @@ single monitor / laptop — just skip the parts that don't apply.
   hides / maximizes) via the `hyprbars` Hyprland plugin
 - **Mouse sensitivity + accel curve** GUI (`Super + =`) for mice with no
   Linux config tool
-- **Monitor brightness** over DDC/CI (`Super + =` again — err, the
-  `XF86MonBrightness` keys) for desktops with no backlight, via `ddcutil`
+- **Monitor brightness** over DDC/CI (the `XF86MonBrightness` keys) for
+  desktops with no backlight, via `ddcutil`
 - **Windows-style area screenshot** (`Super + Shift + S`)
 - A **music player desktop widget**, same style as the clock/weather/RAM
   widgets, reusing Modus's own MPRIS player component
@@ -173,6 +173,12 @@ These cost real debugging time — save yourself the trouble:
   loops (`while true; do waybar; sleep 3; done`) or systemd-managed
   services. `theme-switch.sh` here explicitly kills waybar, the dock, and
   Modus before every switch for exactly this reason.
+
+## Known issues / what's left
+
+See **[TODO.md](TODO.md)** — pending items (a monitor that won't do DDC/CI,
+a notification panel rendering bug, unfinished Secure Boot) and ideas for
+later.
 
 ## Credits
 

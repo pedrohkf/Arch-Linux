@@ -10,6 +10,12 @@ This repository contains the configuration files I use on my daily Arch Linux se
 > traffic-light window buttons, the works). See
 > **[docs/hyprland-modus-setup.md](docs/hyprland-modus-setup.md)**.
 
+## 👀 Preview
+
+![Desktop with the Modus theme active — top bar, dock, wallpaper, desktop widgets](screenshots/desktop-modus.png)
+
+![macOS-style traffic-light window buttons via the hyprbars plugin](screenshots/hyprbars-buttons.png)
+
 ## 📦 Included
 
 * Hyprland
