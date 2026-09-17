@@ -49,6 +49,14 @@ local menu        = "wofi"
 -- hl.on("hyprland.start", ...) com guard (flock) contra restart duplicado.
 dofile(os.getenv("HOME") .. "/.config/Modus/config/hypr/modus.lua")
 
+-- O hyprbars (botões estilo macOS) às vezes não carrega a tempo do parse
+-- inicial da config, e o guard `if hl.plugin.hyprbars` em hardware.lua
+-- pula a criação dos botões. Força o reload do plugin e reprocessa a
+-- config logo após o Hyprland subir, pra garantir que os botões apareçam.
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("hyprpm reload -n && hyprctl reload")
+end)
+
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
