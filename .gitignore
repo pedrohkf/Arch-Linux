@@ -1,0 +1,8 @@
+# Editor / Hyprland autosave backups
+*.save
+*~
+
+# Python
+__pycache__/
+*.pyc
+.venv/

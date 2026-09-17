@@ -1,102 +1,118 @@
-# 🐧 Arch Linux Dotfiles
+<div align="center">
 
-My personal Arch Linux configuration and backup repository.
+# 🖥️ Crafix
 
-This repository contains the configuration files I use on my daily Arch Linux setup, allowing me to quickly recreate my development environment on a new machine.
+**A macOS-style Hyprland desktop for Arch Linux — plus a classic Waybar setup, both one command away.**
 
-> ✨ **Want the macOS-style look?** There's a second, newer setup in here —
-> Hyprland with Lua config, a live theme switcher, and the
-> [Modus](https://github.com/S4NKALP/Modus) shell (top bar, dock, spotlight,
-> traffic-light window buttons, the works). See
-> **[docs/hyprland-modus-setup.md](docs/hyprland-modus-setup.md)**.
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Arch Linux](https://img.shields.io/badge/Arch-Linux-1793D1?logo=arch-linux&logoColor=white)](https://archlinux.org)
+[![Hyprland](https://img.shields.io/badge/Hyprland-Wayland-58E1FF?logo=wayland&logoColor=white)](https://hyprland.org)
+[![Shell](https://img.shields.io/badge/shell-bash-89e051)](install.sh)
 
-## 👀 Preview
+</div>
 
-![Desktop with the Modus theme active — top bar, dock, wallpaper, desktop widgets](screenshots/desktop-modus.png)
+Crafix is a ready-to-use Hyprland configuration with two switchable looks:
+a **classic Waybar** setup, and a **macOS-style shell** (top bar, dock,
+spotlight search, traffic-light window buttons) built on
+[Modus](https://github.com/S4NKALP/Modus). Clone it, run the installer, pick
+a theme with `Super + T`.
 
-![macOS-style traffic-light window buttons via the hyprbars plugin](screenshots/hyprbars-buttons.png)
+<div align="center">
+<img src="screenshots/desktop-modus.png" width="49%" alt="Desktop with the Modus theme active — top bar, dock, wallpaper, desktop widgets" />
+<img src="screenshots/hyprbars-buttons.png" width="49%" alt="macOS-style traffic-light window buttons via the hyprbars plugin" />
+</div>
 
-## 📦 Included
+## ✨ Features
 
-* Hyprland
-* Waybar
-* Kitty
-* Wofi
-* GTK 3 & GTK 4 configuration
-* Bash/Zsh configuration
-* Git configuration
-* Installed package lists (`pacman` & `AUR`)
+- 🎨 **Live theme switcher** (`Super + T`) — swap between the Waybar setup
+  and the full Modus shell without logging out
+- 🔴🟡🟢 **macOS-style window buttons** (close / hide / maximize) via the
+  `hyprbars` Hyprland plugin
+- 🖱️ **Mouse sensitivity + accel curve** GUI (`Super + =`) for mice with no
+  Linux config tool
+- 💡 **Monitor brightness over DDC/CI** (`XF86MonBrightness` keys) — for
+  desktops with no laptop backlight
+- 📸 **Windows-style area screenshot** (`Super + Shift + S`)
+- 🎵 A **desktop music player widget**, matching Modus's clock/weather/RAM
+  widgets and reusing its own MPRIS component
+- ⌨️ Multi-monitor aware, including rotated/portrait displays
+- 📦 Versioned package lists (`pacman` + AUR) so a fresh machine reaches
+  parity in one command
 
-## 📁 Repository Structure
+## 🚀 Quick start
+
+```bash
+git clone https://github.com/pedrohkf/Arch-Linux.git crafix
+cd crafix
+./install.sh
+```
+
+The installer installs the package lists (`packages.txt`, `aur.txt` — needs
+[`yay`](https://github.com/Jguer/yay) for the AUR ones) and copies every
+`.config/` entry into place. It won't touch anything outside `~/.config`,
+`~/.bashrc` and `~/.gitconfig`.
+
+Then:
+
+```bash
+hyprctl reload
+~/.config/hypr/theme-manager/theme-menu.sh   # or theme-switch.sh 0 / 1 directly
+```
+
+Theme `0-default` is plain Waybar and works immediately. Theme `1-macos` is
+the Modus shell, which needs an extra one-time install — see
+**[docs/hyprland-modus-setup.md](docs/hyprland-modus-setup.md)** for the
+full walkthrough (prerequisites, `hyprpm`, monitor-specific gotchas).
+
+> Before reloading, edit `~/.config/hypr/hardware.lua` — monitors, keyboard
+> layout and mouse name are specific to the machine it was built on
+> (`hyprctl devices` to find yours).
+
+## 📁 Repository structure
 
 ```text
 .
 ├── .config/
-│   ├── hypr/                  # Hyprland (Lua) + theme switcher + Modus patches
-│   ├── modus-desktop-widgets/ # custom Modus desktop widgets (e.g. music player)
+│   ├── hypr/                  # Hyprland (Lua config) + theme switcher + Modus patches
+│   │   ├── themes/            # 0-default (Waybar) / 1-macos (Modus)
+│   │   └── theme-manager/     # theme-menu.sh, theme-switch.sh
+│   ├── modus-desktop-widgets/ # custom Modus desktop widgets (music player)
 │   ├── waybar/
 │   ├── kitty/
 │   ├── wofi/
-│   ├── gtk-3.0/
-│   ├── gtk-4.0/
 │   └── mimeapps.list
 ├── docs/
-│   └── hyprland-modus-setup.md
+│   ├── hyprland-modus-setup.md  # full guide for the macOS-style setup
+│   └── TODO.md                  # known issues / ideas
 ├── screenshots/
+├── install.sh
 ├── packages.txt
 ├── aur.txt
 └── README.md
 ```
 
-## 🚀 Restoring the Environment
+## 📋 Requirements
 
-Clone the repository:
-
-```bash
-git clone https://github.com/pedrohkf/Arch-Linux.git
-cd Arch-Linux
-```
-
-Install official packages:
-
-```bash
-sudo pacman -S --needed - < packages.txt
-```
-
-Install AUR packages (requires `yay`):
-
-```bash
-yay -S --needed - < aur.txt
-```
-
-Copy the configuration files:
-
-```bash
-cp -r .config/* ~/.config/
-cp .bashrc ~/ 2>/dev/null
-cp .zshrc ~/ 2>/dev/null
-cp .gitconfig ~/ 2>/dev/null
-```
-
-## 🎯 Goal
-
-The purpose of this repository is to keep my Arch Linux setup versioned and portable, making it easy to migrate to a new computer or restore my environment after a fresh installation.
+- Arch Linux
+- Hyprland with Lua config support (`/usr/include/hyprland/src/config/lua/`
+  should exist — check `pacman -Qi hyprland`)
+- `yay` or another AUR helper
+- `hyprpm` (`sudo pacman -S hyprpm`) for the window-button plugin
+- Optional: `ddcutil` for DDC/CI monitor brightness
 
 ## ⚠️ Notes
 
-This repository intentionally excludes:
+This repository intentionally excludes browser profiles, app caches,
+Downloads, and anything else personal — only configuration files and
+package lists are tracked. See [docs/TODO.md](docs/TODO.md) for known rough
+edges (multi-monitor quirks, a couple of open bugs upstream).
 
-* Browser profiles
-* Discord data
-* VS Code cache
-* Firefox cache
-* Postman data
-* Downloads
-* Personal files
-* Cache and temporary files
+## 🙏 Credits
 
-Only configuration files and package lists are stored.
+Built on top of [Hyprland](https://hyprland.org), the
+[hyprbars](https://github.com/hyprwm/hyprland-plugins) plugin, and
+[Modus](https://github.com/S4NKALP/Modus) by S4NKALP.
 
----
+## 📄 License
 
-Made with ❤️ on Arch Linux.
+[MIT](LICENSE)

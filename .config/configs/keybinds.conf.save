@@ -1,2 +1,0 @@
-bind = SUPER, F, exec, wofi --show drun
-bind = SUPER, B, exec, killall waybar || waybar
