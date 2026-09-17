@@ -18,8 +18,7 @@ spotlight search, traffic-light window buttons) built on
 a theme with `Super + T`.
 
 <div align="center">
-<img src="screenshots/desktop-modus.png" width="49%" alt="Desktop with the Modus theme active — top bar, dock, wallpaper, desktop widgets" />
-<img src="screenshots/hyprbars-buttons.png" width="49%" alt="macOS-style traffic-light window buttons via the hyprbars plugin" />
+<img src="screenshots/desktop.png" width="90%" alt="Desktop with the Modus theme active — top bar, dock, desktop widgets, wallpaper" />
 </div>
 
 ## ✨ Features

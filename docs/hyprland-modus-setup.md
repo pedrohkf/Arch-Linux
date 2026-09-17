@@ -6,9 +6,7 @@ small theme-switcher, and [Modus](https://github.com/S4NKALP/Modus) — a
 full Python/Fabric shell that gives you a macOS-style top bar, dock, spotlight
 search, lock screen and notification center.
 
-![Desktop with the Modus theme active — top bar, dock, wallpaper, desktop widgets](../screenshots/desktop-modus.png)
-
-![macOS-style traffic-light buttons on every window via the hyprbars plugin](../screenshots/hyprbars-buttons.png)
+![Desktop with the Modus theme active — top bar, dock, desktop widgets, wallpaper](../screenshots/desktop.png)
 
 Built and battle-tested on a desktop (no laptop backlight) with two external
 monitors, one of them rotated to portrait. Everything below still works on a
