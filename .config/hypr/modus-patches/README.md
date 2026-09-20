@@ -102,6 +102,87 @@ property/setter so the on-screen brightness popup shows the real value
 instead of always 0%. See the main guide for the `ddcutil` + `i2c-dev`
 system setup this depends on.
 
+**Keep ddcutil off the UI thread and off `--display`.** `ddcutil --display N`
+rescans every i2c bus: ~5s for `getvcp`, ~10s for `setvcp`. Called
+synchronously from the brightness slider (and when the control center is
+built, which reads the current value), it froze the whole shell on every
+tick. Address the i2c bus directly instead (~0.1s) and apply `setvcp` in a
+worker thread where only the latest value wins:
+
+```python
+DDCUTIL = ["ddcutil", "--noverify", "--sleep-multiplier", "0.1"]
+
+# _detect_ddc_displays(): keep the i2c bus of each *valid* "Display N" block
+# (monitors that fail DDC show up as "Invalid display" with no header).
+re.findall(r"^Display \d+\s+I2C bus:\s+/dev/i2c-(\d+)", out, re.MULTILINE)
+# ...then probe with [*DDCUTIL, "--bus", n, "getvcp", "10", "--brief"]
+
+def _set_ddc_brightness(self, value: int):
+    with self._ddc_lock:
+        self._ddc_target = value
+        if self._ddc_running:
+            return
+        self._ddc_running = True
+    threading.Thread(target=self._ddc_worker, daemon=True).start()
+
+def _ddc_worker(self):
+    while True:
+        with self._ddc_lock:
+            value, self._ddc_target = self._ddc_target, None
+            if value is None:
+                self._ddc_running = False
+                return
+        for n in self._ddc_displays:  # i2c bus numbers
+            subprocess.run([*DDCUTIL, "--bus", str(n), "setvcp", "10", str(value)],
+                           capture_output=True, timeout=5)
+```
+
+`_ddc_lock = threading.Lock()`, `_ddc_target = None` and
+`_ddc_running = False` are initialised in `__init__`. Measured: `getvcp`
+4.9s → 0.1s, and 20 rapid sets return in 0.2 ms (coalesced into ~3 calls).
+The same `--display` slowness applies to `brightness.sh` (brightness keys),
+which still runs `ddcutil detect` on every keypress.
+
+## `src/window/controlcenter/main.py` — volume/brightness sliders
+
+The sliders felt stuck at a few positions. PulseAudio (and the brightness
+service) emit async `changed` events carrying **stale** values right after
+a user set; `volume_changed` / `brightness_changed` applied them to the
+slider (yanking it back mid-drag), and that programmatic `set_value`
+re-triggered `set_volume` / `set_brightness`, writing the stale value back
+— a feedback loop. Ignore async events for 300ms after a user-initiated set
+and guard the programmatic `set_value`:
+
+```python
+import time
+# __init__
+self._volume_set_at = 0.0
+self._brightness_set_at = 0.0
+
+def set_volume(self, _, volume):
+    if not self._signals_connected or self._updating_volume:
+        return
+    self._volume_set_at = time.monotonic()
+    ...  # unchanged
+
+def volume_changed(self, _):
+    if (not self._signals_connected or self._updating_volume
+            or time.monotonic() - self._volume_set_at < 0.3):
+        return
+
+    def sync():
+        self._updating_volume = True  # set_value must not re-trigger set_volume
+        self.volume_scale.set_value(int(audio_service.speaker.volume))
+        self._updating_volume = False
+
+    GLib.idle_add(sync)
+```
+
+`set_brightness` / `brightness_changed` get the identical treatment with
+`_updating_brightness` and `_brightness_set_at`. Simulated 25→35→25 drag on
+a real `FlatScale`: old code left the slider ≠ mouse in 9/11 steps, patched
+code in 0/11.
+
 ## `src/window/notification/notification.py` — `create_content()`
 
 Summary/body labels used `ellipsization="end"` with no wrapping, so
