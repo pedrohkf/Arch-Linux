@@ -82,6 +82,7 @@ full walkthrough (prerequisites, `hyprpm`, monitor-specific gotchas).
 │   └── mimeapps.list
 ├── docs/
 │   ├── hyprland-modus-setup.md  # full guide for the macOS-style setup
+│   ├── sddm-autologin-modus-lock.md # SDDM autologin + Modus lock as the login screen
 │   └── TODO.md                  # known issues / ideas
 ├── screenshots/
 ├── install.sh

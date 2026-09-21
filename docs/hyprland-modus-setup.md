@@ -137,6 +137,7 @@ cp .config/modus-desktop-widgets/player.py ~/.config/Modus/config/desktop/
 | `Super + Shift + W` (`Alt+Shift+W`) | Random wallpaper |
 | `Super + I` | Settings |
 | `Super + Ctrl + L` | Lock screen |
+| `Super + L` | Lock screen (extra bind in `hyprland.lua`; see [sddm-autologin-modus-lock.md](sddm-autologin-modus-lock.md)) |
 | `Alt + Tab` | App switcher |
 | `Alt + Shift + R` | Restart Modus |
 | `Super + Alt + S` / `Super + Alt + Shift + S` | Scratchpad toggle / move window there (moved off `Super+S` to avoid clashing with Modus's own screenshot bind) |

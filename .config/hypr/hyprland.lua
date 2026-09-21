@@ -57,6 +57,15 @@ hl.on("hyprland.start", function ()
     hl.exec_cmd("hyprpm reload -n && hyprctl reload")
 end)
 
+-- O Modus só liga o lock em Super+Ctrl+L; Super+L (antigo hyprlock) ficou solto.
+hl.bind("SUPER + L", hl.dsp.exec_cmd('fabric-cli exec modus "lock_screen.lock()"'))
+
+-- SDDM faz autologin; a "tela de login" é o lock do Modus, aberto ao subir a sessão.
+-- (start.py lock é processo próprio, não depende do Modus principal estar no ar.)
+hl.on("hyprland.start", function()
+	hl.exec_cmd("cd " .. os.getenv("HOME") .. "/.config/Modus && uv run python start.py lock")
+end)
+
 
 -------------------------------
 ---- ENVIRONMENT VARIABLES ----
