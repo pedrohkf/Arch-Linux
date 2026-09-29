@@ -25,7 +25,7 @@ require("hardware")
 
 -- Set programs that you use
 local terminal    = "kitty"
-local fileManager = "dolphin"
+local fileManager = "nautilus"
 local menu        = "wofi"
 
 
@@ -48,6 +48,21 @@ local menu        = "wofi"
 -- sem waybar aqui, senão duplica. O dofile já registra seu próprio
 -- hl.on("hyprland.start", ...) com guard (flock) contra restart duplicado.
 dofile(os.getenv("HOME") .. "/.config/Modus/config/hypr/modus.lua")
+
+-- hyprbars (botões estilo macOS) às vezes não carrega a tempo do parse inicial;
+-- força reload do plugin e reprocessa a config logo após o Hyprland subir.
+hl.on("hyprland.start", function ()
+    hl.exec_cmd("hyprpm reload -n && hyprctl reload")
+end)
+
+-- O Modus só liga o lock em Super+Ctrl+L; Super+L (antigo hyprlock) ficou solto.
+hl.bind("SUPER + L", hl.dsp.exec_cmd('fabric-cli exec modus "lock_screen.lock()"'))
+
+-- SDDM faz autologin; a "tela de login" é o lock do Modus, aberto ao subir a sessão.
+-- (start.py lock é processo próprio, não depende do Modus principal estar no ar.)
+hl.on("hyprland.start", function()
+    hl.exec_cmd("cd " .. os.getenv("HOME") .. "/.config/Modus && uv run python start.py lock")
+end)
 
 
 -------------------------------
@@ -240,6 +255,7 @@ hl.bind(mainMod .. " + M", hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2
 -- Super+E e Super+V são do Modus aqui (emoji e clipboard) — dolphin some,
 -- abre via spotlight (Super+D); float toggle vira Shift+V.
 hl.bind(mainMod .. " + SHIFT + V", hl.dsp.window.float({ action = "toggle" }))
+hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(fileManager))
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + P", hl.dsp.window.pseudo())
 hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only

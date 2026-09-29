@@ -11,6 +11,11 @@
 
 </div>
 
+> 💻 **Branch `thinkpad-intel`** — versão para notebooks Intel (testada em ThinkPad T14s Gen 1):
+> tela interna `eDP-1`, touchpad/trackpoint, brilho via `brightnessctl`, drivers Intel
+> (`intel-ucode`, `vulkan-intel`, `intel-media-driver`) e `./install-thinkpad.sh`
+> (pacman + yay + hyprbars + Modus). Ajuste `hardware.lua` se o seu modelo for outro.
+
 Crafix is a ready-to-use Hyprland configuration with two switchable looks:
 a **classic Waybar** setup, and a **macOS-style shell** (top bar, dock,
 spotlight search, traffic-light window buttons) built on
