@@ -1,20 +1,19 @@
 -- Configuração de hardware, compartilhada por TODOS os temas.
--- Não depende do tema ativo: monitores e teclado do Elliot.
+-- Não depende do tema ativo: monitores e teclado do ThinkPad.
 
--- Samsung LF24T35 fica fisicamente à esquerda, na vertical (girado 90° anti-horário)
--- LG UltraGear fica à direita, na horizontal
+-- ThinkPad T14s Gen 1: tela interna eDP-1.
+-- Monitor externo plugado pega "preferred" e fica à direita automaticamente.
 hl.monitor({
-    output    = "HDMI-A-1",
-    mode      = "preferred",
-    position  = "0x0",
-    scale     = 1,
-    transform = 3,
+    output   = "eDP-1",
+    mode     = "preferred",
+    position = "0x0",
+    scale    = 1,
 })
 
 hl.monitor({
-    output   = "DP-1",
+    output   = "",
     mode     = "preferred",
-    position = "1080x0", -- 1920x1080 rotado vira 1080x1920 de largura
+    position = "auto",
     scale    = 1,
 })
 
@@ -28,16 +27,19 @@ hl.config({
 
         follow_mouse = 1,
         sensitivity  = 0,
+
+        touchpad = {
+            natural_scroll = false,
+            tap_to_click   = true,
+        },
     },
 })
 
--- Mouse HyperX Pulsefire Core (sem software oficial no Linux).
--- sensitivity vai de -1.0 (mais lento) a 1.0 (mais rápido), 0 = padrão.
--- accel_profile "flat" tira a curva de aceleração (1:1, comum em mouse gamer).
+-- Trackpoint do ThinkPad (mouse externo: `hyprctl devices` pra achar o nome).
 hl.device({
-    name          = "kingston-hyperx-pulsefire-core",
-    sensitivity   = 0.05,
-    accel_profile = "flat",
+    name          = "elan-trackpoint",
+    sensitivity   = 0,
+    accel_profile = "adaptive",
 })
 
 -- Botões de janela estilo macOS (bolinhas vermelha/amarela/verde) via plugin
