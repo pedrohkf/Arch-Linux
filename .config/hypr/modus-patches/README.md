@@ -215,6 +215,51 @@ though it opened correctly. Give it a real background:
 }
 ```
 
+## Notebook (ThinkPad / Intel): o que muda
+
+Em notebook com backlight, o Modus já usa `brightnessctl` e logind, então
+**os patches de DDC/CI acima não se aplicam**. O que ainda vale:
+`keyboard_layouts`, `lock.py`, dock e notificações. O Modus usa o
+NetworkManager pro Wi-Fi (`services/network.py`, `dns.py`), então em máquinas
+que rodam `iwd` + `systemd-networkd` troque pro NetworkManager com
+`wifi.backend=iwd`.
+
+## `src/window/controlcenter/main.py` — slider de brilho pulando (0/50/100%)
+
+Mesmo bug de feedback-loop do volume, agora no brilho: `brightness_changed`
+recebe eventos assíncronos (sysfs/logind) com valores intermediários, joga no
+slider, e o `set_value` programático dispara `set_brightness` de novo. Correção:
+ignorar eventos por 300 ms depois de um ajuste do usuário, e fazer
+`set_volume`/`set_brightness` retornarem cedo quando `_updating_*` está ligado:
+
+```python
+import time
+# __init__
+self._brightness_set_at = 0.0
+self._volume_set_at = 0.0
+
+def set_brightness(self, _, brightness):
+    if not self._signals_connected or self._updating_brightness:
+        return
+    self._brightness_set_at = time.monotonic()
+    ...  # inalterado
+
+def brightness_changed(self, _, brightness_percentage):
+    if (not self._signals_connected or self._updating_brightness
+            or time.monotonic() - self._brightness_set_at < 0.3):
+        return
+
+    def sync():
+        self._updating_brightness = True
+        self.brightness_scale.set_value(brightness_percentage)
+        self._updating_brightness = False
+
+    GLib.idle_add(sync)
+```
+
+`set_volume` / `volume_changed` recebem o mesmo tratamento com
+`_updating_volume` e `_volume_set_at`.
+
 ---
 
 All of the above are local patches on top of Modus's own files — they're
