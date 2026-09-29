@@ -1,5 +1,9 @@
 # Tela de login = lock do Modus (SDDM autologin)
 
+> **ThinkPad:** trocar de `cosmic-greeter` pra SDDM: `sudo systemctl disable cosmic-greeter && sudo systemctl enable sddm`
+> (nunca `start` na sessão ativa). Os hooks (`Super+L`, lock ao subir, `hyprpm reload`) agora vivem em
+> `themes/1-macos/hyprland.lua` — o `theme-switch.sh` sobrescreve o `hyprland.lua`, então o que não estiver no tema some.
+
 Anotação pra quando algo der errado no boot/lock. Contexto do setup geral em
 [hyprland-modus-setup.md](hyprland-modus-setup.md).
 
