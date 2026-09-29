@@ -19,7 +19,16 @@ if ! command -v yay >/dev/null; then
 fi
 
 echo "==> Pacotes AUR"
-yay -S --needed figma-linux google-chrome libresprite-git postman-bin spicetify-cli spotify sublime-text-4 visual-studio-code-bin weylus-bin 
+yay -S --needed whitesur-gtk-theme whitesur-icon-theme figma-linux google-chrome libresprite-git postman-bin spicetify-cli spotify sublime-text-4 visual-studio-code-bin weylus-bin 
+
+echo "==> Tema WhiteSur (Nautilus / GTK4)"
+mkdir -p ~/.config/gtk-4.0 ~/.config/gtk-3.0
+for f in assets gtk.css gtk-dark.css; do ln -sfn /usr/share/themes/WhiteSur-Dark/gtk-4.0/\$f ~/.config/gtk-4.0/\$f; done
+cp "\$(dirname "\$0")/.config/gtk-3.0/settings.ini" ~/.config/gtk-3.0/
+gsettings set org.gnome.desktop.interface gtk-theme 'WhiteSur-Dark'
+gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+xdg-mime default org.gnome.Nautilus.desktop inode/directory
 
 echo "==> Plugin hyprbars (botões estilo macOS)"
 hyprpm update

@@ -13,15 +13,19 @@ docker
 dolphin
 dunst
 efibootmgr
+file-roller
 firefox
 flameshot
 foliate
 fpc
 gammastep
 git
+gnome-themes-extra
 grim
 grub
 gst-plugin-pipewire
+gvfs
+gvfs-mtp
 htop
 hyprland
 hyprpaper
@@ -39,6 +43,7 @@ libreoffice-fresh
 linux
 linux-firmware
 nano
+nautilus
 ncdu
 neovim
 networkmanager

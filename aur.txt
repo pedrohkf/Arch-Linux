@@ -7,3 +7,5 @@ spotify
 sublime-text-4
 visual-studio-code-bin
 weylus-bin
+whitesur-gtk-theme
+whitesur-icon-theme
