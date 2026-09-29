@@ -1,7 +1,5 @@
-burpsuite
 figma-linux
 google-chrome
-grub-customizer
 libresprite-git
 postman-bin
 spicetify-cli

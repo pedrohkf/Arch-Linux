@@ -25,6 +25,7 @@ gst-plugin-pipewire
 htop
 hyprland
 hyprpaper
+hyprpm
 hyprsunset
 imv
 intel-media-driver

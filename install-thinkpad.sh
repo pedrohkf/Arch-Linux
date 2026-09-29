@@ -9,7 +9,7 @@ if ! grep -q '^\[multilib\]' /etc/pacman.conf; then
 fi
 
 echo "==> Pacotes oficiais"
-sudo pacman -Syu --needed ark base base-devel bluez bluez-utils brightnessctl calibre cups cups-pk-helper dbeaver discord docker dolphin dunst efibootmgr firefox flameshot foliate fpc gammastep git grim grub gst-plugin-pipewire htop hyprland hyprpaper hyprsunset imv intel-media-driver intel-ucode iwd kitty less libnotify libpulse libreoffice-fresh linux linux-firmware nano ncdu neovim networkmanager network-manager-applet npm ntfs-3g obsidian os-prober pacman-contrib pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse playerctl polkit-kde-agent pulsemixer qt5-wayland qt6-wayland sbctl sddm slurp smartmontools starship steam sudo system-config-printer translate-shell ttf-jetbrains-mono-nerd unzip uwsm vim vulkan-intel waybar wget wireless_tools wireplumber wl-clipboard wofi xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils xorg-server xorg-xhost xorg-xinit zram-generator 
+sudo pacman -Syu --needed ark base base-devel bluez bluez-utils brightnessctl calibre cups cups-pk-helper dbeaver discord docker dolphin dunst efibootmgr firefox flameshot foliate fpc gammastep git grim grub gst-plugin-pipewire htop hyprland hyprpaper hyprpm hyprsunset imv intel-media-driver intel-ucode iwd kitty less libnotify libpulse libreoffice-fresh linux linux-firmware nano ncdu neovim networkmanager network-manager-applet npm ntfs-3g obsidian os-prober pacman-contrib pavucontrol pipewire pipewire-alsa pipewire-jack pipewire-pulse playerctl polkit-kde-agent pulsemixer qt5-wayland qt6-wayland sbctl sddm slurp smartmontools starship steam sudo system-config-printer translate-shell ttf-jetbrains-mono-nerd unzip uwsm vim vulkan-intel waybar wget wireless_tools wireplumber wl-clipboard wofi xdg-desktop-portal-gtk xdg-desktop-portal-hyprland xdg-utils xorg-server xorg-xhost xorg-xinit zram-generator 
 
 echo "==> yay"
 if ! command -v yay >/dev/null; then
@@ -19,7 +19,7 @@ if ! command -v yay >/dev/null; then
 fi
 
 echo "==> Pacotes AUR"
-yay -S --needed burpsuite figma-linux google-chrome grub-customizer libresprite-git postman-bin spicetify-cli spotify sublime-text-4 visual-studio-code-bin weylus-bin 
+yay -S --needed figma-linux google-chrome libresprite-git postman-bin spicetify-cli spotify sublime-text-4 visual-studio-code-bin weylus-bin 
 
 echo "==> Plugin hyprbars (botões estilo macOS)"
 hyprpm update
