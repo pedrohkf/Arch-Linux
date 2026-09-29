@@ -30,6 +30,12 @@ gsettings set org.gnome.desktop.interface icon-theme 'WhiteSur-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 xdg-mime default org.gnome.Nautilus.desktop inode/directory
 
+echo "==> Limite de carga da bateria (75-80%, ThinkPad)"
+if [ -e /sys/class/power_supply/BAT0/charge_control_end_threshold ]; then
+    sudo cp "\$(dirname "\$0")/system/battery.conf" /etc/tmpfiles.d/battery.conf
+    sudo systemd-tmpfiles --create
+fi
+
 echo "==> Plugin hyprbars (botões estilo macOS)"
 hyprpm update
 hyprpm add https://github.com/hyprwm/hyprland-plugins || true
