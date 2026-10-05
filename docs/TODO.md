@@ -16,10 +16,11 @@ Coisas que ficaram pendentes ou poderiam ficar melhores no setup do
   fundo no código deles — precisaria de GTK Inspector ao vivo pra debugar
   direito. O toast normal (aviso que aparece e some) funciona bem, só o
   histórico que não.
-- [ ] **Secure Boot** — parou no meio: já instalado `sbctl`, falta resetar a
-  firmware pra Setup Mode (precisa mexer na BIOS fisicamente), gerar/enrolar
-  as chaves com `--microsoft` (senão o Windows para de bootar), e assinar
-  GRUB + UKI.
+- [ ] **Secure Boot** — chaves do `sbctl` já criadas e GRUB/UKI/kernel já
+  assinados, mas as chaves **não estão enroladas no firmware**. Falta: limpar
+  as chaves na BIOS (Setup Mode), `sudo sbctl enroll-keys --microsoft`
+  (senão o Windows para de bootar), checar se o GRUB aguenta o Secure Boot
+  sem shim e ligar. Plano completo em [secure-boot.md](secure-boot.md).
 
 ## Ideias / não crítico
 
